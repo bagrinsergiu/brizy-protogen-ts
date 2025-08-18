@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "name": "@brizy/protogen-ts",
+  "description": "TypeScript protobuf generated types for Brizy platform",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:types && npm run build:finalize",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:finalize": "./bin/build.sh",
+    "clean": "rimraf dist dist-temp",
+    "generate-index": "./bin/createRootFile.sh",
+    "prebuild": "npm run generate-index",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "brizy",
+    "protobuf",
+    "typescript",
+    "grpc",
+    "types"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brizy/protogen-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brizy/protogen-ts/issues"
+  },
+  "homepage": "https://github.com/brizy/protogen-ts#readme",
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.6.3"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

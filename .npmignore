@@ -1,0 +1,53 @@
+# Source files (only include built dist)
+src/
+gen/
+
+# Development files
+tsconfig*.json
+.git/
+.gitignore
+.env*
+
+# Build artifacts
+node_modules/
+*.log
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+**/*.test.*
+**/*.spec.*
+test/
+tests/
+__tests__/
+
+# Documentation source (keep README.md)
+docs/
+*.md
+!README.md
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Linting
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# Coverage reports
+coverage/
+.nyc_output/

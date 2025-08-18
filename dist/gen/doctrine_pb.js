@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DoctrineEventMessage_DoctrineEventTypeSchema = exports.DoctrineEventMessage_DoctrineEventType = exports.DoctrineEventMessageSchema = exports.file_doctrine = void 0;
+const codegenv2_1 = require("@bufbuild/protobuf/codegenv2");
+const message_pb_1 = require("./message_pb");
+exports.file_doctrine = (0, codegenv2_1.fileDesc)("Cg5kb2N0cmluZS5wcm90bxIVYnJpenlNZXNzYWdlLmRvY3RyaW5lIsEDChREb2N0cmluZUV2ZW50TWVzc2FnZRI+Cg1kZXNjcmltaW5hdG9yGAEgASgOMicuYnJpenlNZXNzYWdlLk1lc3NhZ2UuRGVzY3JpbWluYXRvclR5cGUSTAoFZXZlbnQYAiABKA4yPS5icml6eU1lc3NhZ2UuZG9jdHJpbmUuRG9jdHJpbmVFdmVudE1lc3NhZ2UuRG9jdHJpbmVFdmVudFR5cGUSEQoJZW50aXR5X2lkGAMgASgFEhcKD2VudGl0eV9zbmFwc2hvdBgEIAEoCRIUCgxlbnRpdHlfY2xhc3MYBSABKAkSFAoMYWNjZXNzX3Rva2VuGAYgASgJIsIBChFEb2N0cmluZUV2ZW50VHlwZRIOCgpQUkVfUkVNT1ZFEAASDwoLUE9TVF9SRU1PVkUQARIPCgtQUkVfUEVSU0lTVBACEhAKDFBPU1RfUEVSU0lTVBADEg4KClBSRV9VUERBVEUQBBIPCgtQT1NUX1VQREFURRAFEg0KCVBPU1RfTE9BRBAGEg0KCVBSRV9GTFVTSBAHEgwKCE9OX0ZMVVNIEAgSDgoKUE9TVF9GTFVTSBAJEgwKCE9OX0NMRUFSEApiBnByb3RvMw", [message_pb_1.file_message]);
+exports.DoctrineEventMessageSchema = (0, codegenv2_1.messageDesc)(exports.file_doctrine, 0);
+var DoctrineEventMessage_DoctrineEventType;
+(function (DoctrineEventMessage_DoctrineEventType) {
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["PRE_REMOVE"] = 0] = "PRE_REMOVE";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["POST_REMOVE"] = 1] = "POST_REMOVE";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["PRE_PERSIST"] = 2] = "PRE_PERSIST";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["POST_PERSIST"] = 3] = "POST_PERSIST";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["PRE_UPDATE"] = 4] = "PRE_UPDATE";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["POST_UPDATE"] = 5] = "POST_UPDATE";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["POST_LOAD"] = 6] = "POST_LOAD";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["PRE_FLUSH"] = 7] = "PRE_FLUSH";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["ON_FLUSH"] = 8] = "ON_FLUSH";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["POST_FLUSH"] = 9] = "POST_FLUSH";
+    DoctrineEventMessage_DoctrineEventType[DoctrineEventMessage_DoctrineEventType["ON_CLEAR"] = 10] = "ON_CLEAR";
+})(DoctrineEventMessage_DoctrineEventType || (exports.DoctrineEventMessage_DoctrineEventType = DoctrineEventMessage_DoctrineEventType = {}));
+exports.DoctrineEventMessage_DoctrineEventTypeSchema = (0, codegenv2_1.enumDesc)(exports.file_doctrine, 0, 0);

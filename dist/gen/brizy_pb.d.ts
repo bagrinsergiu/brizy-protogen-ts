@@ -1,0 +1,76 @@
+import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { Message_DescriminatorType } from "./message_pb";
+import type { Message } from "@bufbuild/protobuf";
+export declare const file_brizy: GenFile;
+export type CreateCollectionItemMessage = Message<"brizyMessage.brizy.CreateCollectionItemMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const CreateCollectionItemMessageSchema: GenMessage<CreateCollectionItemMessage>;
+export type UpdateCollectionItemMessage = Message<"brizyMessage.brizy.UpdateCollectionItemMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const UpdateCollectionItemMessageSchema: GenMessage<UpdateCollectionItemMessage>;
+export type DeleteCollectionItemMessage = Message<"brizyMessage.brizy.DeleteCollectionItemMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const DeleteCollectionItemMessageSchema: GenMessage<DeleteCollectionItemMessage>;
+export type CreateCollectionTypeMessage = Message<"brizyMessage.brizy.CreateCollectionTypeMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const CreateCollectionTypeMessageSchema: GenMessage<CreateCollectionTypeMessage>;
+export type UpdateCollectionTypeMessage = Message<"brizyMessage.brizy.UpdateCollectionTypeMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const UpdateCollectionTypeMessageSchema: GenMessage<UpdateCollectionTypeMessage>;
+export type DeleteCollectionTypeMessage = Message<"brizyMessage.brizy.DeleteCollectionTypeMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const DeleteCollectionTypeMessageSchema: GenMessage<DeleteCollectionTypeMessage>;
+export type CreateCustomerMessage = Message<"brizyMessage.brizy.CreateCustomerMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const CreateCustomerMessageSchema: GenMessage<CreateCustomerMessage>;
+export type UpdateCustomerMessage = Message<"brizyMessage.brizy.UpdateCustomerMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const UpdateCustomerMessageSchema: GenMessage<UpdateCustomerMessage>;
+export type DeleteCustomerMessage = Message<"brizyMessage.brizy.DeleteCustomerMessage"> & {
+    descriminator: Message_DescriminatorType;
+    projectIri: string;
+    entityIri: string;
+    brziyApiAccessToken: string;
+    userId: string;
+};
+export declare const DeleteCustomerMessageSchema: GenMessage<DeleteCustomerMessage>;

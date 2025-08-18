@@ -1,0 +1,6 @@
+/node_modules/
+.idea/
+.vscode/
+# /dist/  currently these package are imported from the github
+/node_modules/
+.DS_Store
