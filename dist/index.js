@@ -14,7 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toJson = exports.fromJson = exports.toBinary = exports.fromBinary = exports.create = void 0;
+exports.anyIs = exports.anyPack = exports.toJson = exports.fromJson = exports.toBinary = exports.fromBinary = exports.create = void 0;
 __exportStar(require("./gen/brizy_pb"), exports);
 __exportStar(require("./gen/cloud_pb"), exports);
 __exportStar(require("./gen/doctrine_pb"), exports);
@@ -27,3 +27,6 @@ Object.defineProperty(exports, "fromBinary", { enumerable: true, get: function (
 Object.defineProperty(exports, "toBinary", { enumerable: true, get: function () { return protobuf_1.toBinary; } });
 Object.defineProperty(exports, "fromJson", { enumerable: true, get: function () { return protobuf_1.fromJson; } });
 Object.defineProperty(exports, "toJson", { enumerable: true, get: function () { return protobuf_1.toJson; } });
+var wkt_1 = require("@bufbuild/protobuf/wkt");
+Object.defineProperty(exports, "anyPack", { enumerable: true, get: function () { return wkt_1.anyPack; } });
+Object.defineProperty(exports, "anyIs", { enumerable: true, get: function () { return wkt_1.anyIs; } });

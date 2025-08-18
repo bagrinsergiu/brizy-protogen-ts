@@ -65,12 +65,12 @@ EOF
 for file in "${pb_files[@]}"; do
     # Get relative path from src to gen
     rel_path="../gen/$(basename "$file" .ts)"
-    
+
     # Get the base name without _pb suffix for better organization
     base_name=$(basename "$file" _pb.ts)
     # Capitalize first letter (compatible with older bash versions)
     capitalized_name="$(tr '[:lower:]' '[:upper:]' <<< ${base_name:0:1})${base_name:1}"
-    
+
     echo "// ${capitalized_name} message types" >> "$INDEX_FILE"
     echo "export * from '$rel_path';" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
@@ -80,6 +80,7 @@ done
 cat >> "$INDEX_FILE" << 'EOF'
 // Re-export protobuf utilities that might be useful
 export { create, fromBinary, toBinary, fromJson, toJson } from '@bufbuild/protobuf';
+export { type Any, anyPack, anyIs } from "@bufbuild/protobuf/wkt";
 EOF
 
 echo -e "${GREEN}✅ Successfully generated $INDEX_FILE${NC}"

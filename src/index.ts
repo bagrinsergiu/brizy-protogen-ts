@@ -22,3 +22,4 @@ export * from '../gen/translation_pb';
 
 // Re-export protobuf utilities that might be useful
 export { create, fromBinary, toBinary, fromJson, toJson } from '@bufbuild/protobuf';
+export { type Any, anyPack, anyIs } from "@bufbuild/protobuf/wkt";
