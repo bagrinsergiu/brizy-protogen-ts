@@ -97,22 +97,6 @@ This package is built with TypeScript and provides full type definitions. All me
 
 ## Development
 
-### Generating Index File
-
-When you add new protobuf files to the `gen/` directory, you can automatically regenerate the `src/index.ts` file:
-
-```bash
-npm run generate-index
-# or directly:
-./bin/createRootFile.sh
-```
-
-This script will:
-- 🔍 Scan the `gen/` directory for all `*_pb.ts` files
-- 📝 Generate a new `src/index.ts` with exports for all found protobuf files
-- 🎨 Add organized comments for each message type
-- ✅ Include protobuf utility re-exports
-
 ### Building
 
 ```bash
@@ -120,16 +104,14 @@ npm run build
 ```
 
 This will:
-1. **Auto-generate** `src/index.ts` from protobuf files (via `prebuild` hook)
-2. **Clean** the dist directory
-3. **Build** all formats:
+1. **Clean** the dist directory
+2. **Build** all formats:
    - CommonJS build in `dist/` (for Node.js)
    - ES modules build in `dist/` (for modern bundlers)
    - TypeScript declarations in `dist/`
 
 ### Scripts
 
-- `npm run generate-index` - Auto-generate src/index.ts from gen/ files
 - `npm run build` - Build all formats (CJS, ESM, types) with auto-generation
 - `npm run clean` - Clean the dist directory
 - `npm run build:cjs` - Build CommonJS format
@@ -139,9 +121,8 @@ This will:
 ### Workflow
 
 1. **Generate protobuf files** into `gen/` directory (using your protoc setup)
-2. **Run** `npm run generate-index` to update exports
-3. **Build** with `npm run build` (or the index will be auto-generated)
-4. **Publish** with `npm publish`
+2. **Build** with `npm run build` (or the index will be auto-generated)
+3. **Publish** with `npm publish`
 
 ## License
 
