@@ -24,8 +24,6 @@
     "build:types": "tsc -p tsconfig.types.json",
     "build:finalize": "./bin/build.sh",
     "clean": "rimraf dist dist-temp",
-    "generate-index": "./bin/createRootFile.sh",
-    "prebuild": "npm run generate-index",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -54,6 +52,7 @@
     "typescript": "^5.9.2"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   }
 }

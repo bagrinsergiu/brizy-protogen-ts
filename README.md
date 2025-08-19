@@ -13,14 +13,14 @@ npm install @brizy/protogen-ts
 ### Basic Import
 
 ```typescript
-import { 
+import {
   CreateCollectionItemMessage,
   UpdateCollectionItemMessage,
   DeleteCollectionItemMessage,
   Message_DescriminatorType,
   create,
   fromBinary,
-  toBinary 
+  toBinary
 } from '@brizy/protogen-ts';
 ```
 
@@ -124,7 +124,7 @@ This will:
 2. **Clean** the dist directory
 3. **Build** all formats:
    - CommonJS build in `dist/` (for Node.js)
-   - ES modules build in `dist/` (for modern bundlers)  
+   - ES modules build in `dist/` (for modern bundlers)
    - TypeScript declarations in `dist/`
 
 ### Scripts
