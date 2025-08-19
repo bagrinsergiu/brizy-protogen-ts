@@ -124,8 +124,18 @@ export function getMessage(
   buffer: Uint8Array | ArrayLike<number>,
 ): AllMessageTypes | undefined {
   try {
+    const content = buffer.toString();
+    const message = JSON.parse(content);
+
+    if (!message.payload) {
+      throw new Error("Invalid message payload");
+    }
+
     // First, decode as base Message to get the discriminator
-    const baseMessage = fromBinary(MessageSchema, new Uint8Array(buffer));
+    const baseMessage = fromBinary(
+      MessageSchema,
+      new Uint8Array(message.payload),
+    );
     const discriminator = baseMessage.descriminator;
 
     // Convert Buffer to Uint8Array for fromBinary
