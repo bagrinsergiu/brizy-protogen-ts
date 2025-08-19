@@ -29,6 +29,7 @@ export {
 } from "@bufbuild/protobuf";
 export { type Any, anyPack, anyIs } from "@bufbuild/protobuf/wkt";
 
+import { base64Decode } from "@bufbuild/protobuf/wire";
 import { fromBinary } from "@bufbuild/protobuf";
 
 // Import all message types and schemas for getMessage function
@@ -131,15 +132,10 @@ export function getMessage(
       throw new Error("Invalid message payload");
     }
 
+    const payload = base64Decode(message.payload);
     // First, decode as base Message to get the discriminator
-    const baseMessage = fromBinary(
-      MessageSchema,
-      new Uint8Array(message.payload),
-    );
+    const baseMessage = fromBinary(MessageSchema, payload);
     const discriminator = baseMessage.descriminator;
-
-    // Convert Buffer to Uint8Array for fromBinary
-    const data = new Uint8Array(buffer);
 
     // Decode the specific message type based on discriminator
     switch (discriminator) {
@@ -147,73 +143,74 @@ export function getMessage(
         return baseMessage;
 
       case Message_DescriminatorType.CLOUD_CLONE_PROJECT_MESSAGE:
-        return fromBinary(CloneProjectMessageSchema, data);
+        return fromBinary(CloneProjectMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CREATE_PROJECT_MESSAGE:
-        return fromBinary(CreateProjectMessageSchema, data);
+        return fromBinary(CreateProjectMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CREATE_USER_MESSAGE:
-        return fromBinary(CreateUserMessageSchema, data);
+        return fromBinary(CreateUserMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CLONE_COLLECTION_ITEM_MESSAGE:
-        return fromBinary(CloneCollectionItemMessageSchema, data);
+        return fromBinary(CloneCollectionItemMessageSchema, payload);
 
       case Message_DescriminatorType.CREATE_COLLECTION_TYPE_MESSAGE:
-        return fromBinary(CreateCollectionTypeMessageSchema, data);
+        return fromBinary(CreateCollectionTypeMessageSchema, payload);
 
       case Message_DescriminatorType.UPDATE_COLLECTION_TYPE_MESSAGE:
-        return fromBinary(UpdateCollectionTypeMessageSchema, data);
+        return fromBinary(UpdateCollectionTypeMessageSchema, payload);
 
       case Message_DescriminatorType.DELETE_COLLECTION_TYPE_MESSAGE:
-        return fromBinary(DeleteCollectionTypeMessageSchema, data);
+        return fromBinary(DeleteCollectionTypeMessageSchema, payload);
 
       case Message_DescriminatorType.CREATE_COLLECTION_ITEM_MESSAGE:
-        return fromBinary(CreateCollectionItemMessageSchema, data);
+        return fromBinary(CreateCollectionItemMessageSchema, payload);
 
       case Message_DescriminatorType.UPDATE_COLLECTION_ITEM_MESSAGE:
-        return fromBinary(UpdateCollectionItemMessageSchema, data);
+        return fromBinary(UpdateCollectionItemMessageSchema, payload);
 
       case Message_DescriminatorType.DELETE_COLLECTION_ITEM_MESSAGE:
-        return fromBinary(DeleteCollectionItemMessageSchema, data);
+        return fromBinary(DeleteCollectionItemMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_DELETE_PROJECT_MESSAGE:
-        return fromBinary(DeleteProjectMessageSchema, data);
+        return fromBinary(DeleteProjectMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_DELETE_USER_MESSAGE:
-        return fromBinary(DeleteUserMessageSchema, data);
+        return fromBinary(DeleteUserMessageSchema, payload);
 
       case Message_DescriminatorType.DOCTRINE_MESSAGE:
-        return fromBinary(DoctrineEventMessageSchema, data);
+        return fromBinary(DoctrineEventMessageSchema, payload);
 
       case Message_DescriminatorType.NOTIFICATION_MESSAGE:
-        return fromBinary(NotificationMessageSchema, data);
+        return fromBinary(NotificationMessageSchema, payload);
 
       case Message_DescriminatorType.REMOVE_ENTITY_TRANSLATION_MESSAGE:
-        return fromBinary(RemoveEntityTranslationMessageSchema, data);
+        return fromBinary(RemoveEntityTranslationMessageSchema, payload);
 
       case Message_DescriminatorType.TRANSLATE_ENTITY_MESSAGE:
-        return fromBinary(TranslateEntityMessageSchema, data);
+        return fromBinary(TranslateEntityMessageSchema, payload);
 
       case Message_DescriminatorType.CREATE_CUSTOMER_MESSAGE:
-        return fromBinary(CreateCustomerMessageSchema, data);
+        return fromBinary(CreateCustomerMessageSchema, payload);
 
       case Message_DescriminatorType.UPDATE_CUSTOMER_MESSAGE:
-        return fromBinary(UpdateCustomerMessageSchema, data);
+        return fromBinary(UpdateCustomerMessageSchema, payload);
 
       case Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
-        return fromBinary(DeleteCustomerMessageSchema, data);
+        return fromBinary(DeleteCustomerMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
-        return fromBinary(CloneCustomerMessageSchema, data);
+        return fromBinary(CloneCustomerMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
-        return fromBinary(ClearPlatformCacheMessageSchema, data);
+        return fromBinary(ClearPlatformCacheMessageSchema, payload);
 
       default:
         // Unknown discriminator, return base message
         return baseMessage;
     }
   } catch (error) {
+    console.error(error);
     // If any error occurs during decoding, return undefined
     return undefined;
   }

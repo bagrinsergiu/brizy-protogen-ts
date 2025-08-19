@@ -31,6 +31,7 @@ Object.defineProperty(exports, "toJson", { enumerable: true, get: function () { 
 var wkt_1 = require("@bufbuild/protobuf/wkt");
 Object.defineProperty(exports, "anyPack", { enumerable: true, get: function () { return wkt_1.anyPack; } });
 Object.defineProperty(exports, "anyIs", { enumerable: true, get: function () { return wkt_1.anyIs; } });
+const wire_1 = require("@bufbuild/protobuf/wire");
 const protobuf_2 = require("@bufbuild/protobuf");
 const message_pb_1 = require("./gen/message_pb");
 const brizy_pb_1 = require("./gen/brizy_pb");
@@ -40,59 +41,65 @@ const notification_pb_1 = require("./gen/notification_pb");
 const translation_pb_1 = require("./gen/translation_pb");
 function getMessage(buffer) {
     try {
-        const baseMessage = (0, protobuf_2.fromBinary)(message_pb_1.MessageSchema, new Uint8Array(buffer));
+        const content = buffer.toString();
+        const message = JSON.parse(content);
+        if (!message.payload) {
+            throw new Error("Invalid message payload");
+        }
+        const payload = (0, wire_1.base64Decode)(message.payload);
+        const baseMessage = (0, protobuf_2.fromBinary)(message_pb_1.MessageSchema, payload);
         const discriminator = baseMessage.descriminator;
-        const data = new Uint8Array(buffer);
         switch (discriminator) {
             case message_pb_1.Message_DescriminatorType.NONE:
                 return baseMessage;
             case message_pb_1.Message_DescriminatorType.CLOUD_CLONE_PROJECT_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneProjectMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneProjectMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CREATE_PROJECT_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.CreateProjectMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.CreateProjectMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CREATE_USER_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.CreateUserMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.CreateUserMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CLONE_COLLECTION_ITEM_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneCollectionItemMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneCollectionItemMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CREATE_COLLECTION_TYPE_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCollectionTypeMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCollectionTypeMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.UPDATE_COLLECTION_TYPE_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCollectionTypeMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCollectionTypeMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.DELETE_COLLECTION_TYPE_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCollectionTypeMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCollectionTypeMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CREATE_COLLECTION_ITEM_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCollectionItemMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCollectionItemMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.UPDATE_COLLECTION_ITEM_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCollectionItemMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCollectionItemMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.DELETE_COLLECTION_ITEM_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCollectionItemMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCollectionItemMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_DELETE_PROJECT_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.DeleteProjectMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.DeleteProjectMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_DELETE_USER_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.DeleteUserMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.DeleteUserMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.DOCTRINE_MESSAGE:
-                return (0, protobuf_2.fromBinary)(doctrine_pb_1.DoctrineEventMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(doctrine_pb_1.DoctrineEventMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.NOTIFICATION_MESSAGE:
-                return (0, protobuf_2.fromBinary)(notification_pb_1.NotificationMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(notification_pb_1.NotificationMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.REMOVE_ENTITY_TRANSLATION_MESSAGE:
-                return (0, protobuf_2.fromBinary)(translation_pb_1.RemoveEntityTranslationMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(translation_pb_1.RemoveEntityTranslationMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.TRANSLATE_ENTITY_MESSAGE:
-                return (0, protobuf_2.fromBinary)(translation_pb_1.TranslateEntityMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(translation_pb_1.TranslateEntityMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CREATE_CUSTOMER_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCustomerMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.UPDATE_CUSTOMER_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCustomerMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
-                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCustomerMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneCustomerMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
-                return (0, protobuf_2.fromBinary)(cloud_pb_1.ClearPlatformCacheMessageSchema, data);
+                return (0, protobuf_2.fromBinary)(cloud_pb_1.ClearPlatformCacheMessageSchema, payload);
             default:
                 return baseMessage;
         }
     }
     catch (error) {
+        console.error(error);
         return undefined;
     }
 }

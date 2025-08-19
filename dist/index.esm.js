@@ -6,6 +6,7 @@ export * from "./gen/notification_pb";
 export * from "./gen/translation_pb";
 export { create, fromBinary, toBinary, fromJson, toJson, } from "@bufbuild/protobuf";
 export { anyPack, anyIs } from "@bufbuild/protobuf/wkt";
+import { base64Decode } from "@bufbuild/protobuf/wire";
 import { fromBinary } from "@bufbuild/protobuf";
 import { MessageSchema, Message_DescriminatorType, } from "./gen/message_pb";
 import { CreateCollectionItemMessageSchema, CreateCollectionTypeMessageSchema, CreateCustomerMessageSchema, DeleteCollectionItemMessageSchema, DeleteCollectionTypeMessageSchema, DeleteCustomerMessageSchema, UpdateCollectionItemMessageSchema, UpdateCollectionTypeMessageSchema, UpdateCustomerMessageSchema, } from "./gen/brizy_pb";
@@ -15,59 +16,65 @@ import { NotificationMessageSchema, } from "./gen/notification_pb";
 import { RemoveEntityTranslationMessageSchema, TranslateEntityMessageSchema, } from "./gen/translation_pb";
 export function getMessage(buffer) {
     try {
-        const baseMessage = fromBinary(MessageSchema, new Uint8Array(buffer));
+        const content = buffer.toString();
+        const message = JSON.parse(content);
+        if (!message.payload) {
+            throw new Error("Invalid message payload");
+        }
+        const payload = base64Decode(message.payload);
+        const baseMessage = fromBinary(MessageSchema, payload);
         const discriminator = baseMessage.descriminator;
-        const data = new Uint8Array(buffer);
         switch (discriminator) {
             case Message_DescriminatorType.NONE:
                 return baseMessage;
             case Message_DescriminatorType.CLOUD_CLONE_PROJECT_MESSAGE:
-                return fromBinary(CloneProjectMessageSchema, data);
+                return fromBinary(CloneProjectMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CREATE_PROJECT_MESSAGE:
-                return fromBinary(CreateProjectMessageSchema, data);
+                return fromBinary(CreateProjectMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CREATE_USER_MESSAGE:
-                return fromBinary(CreateUserMessageSchema, data);
+                return fromBinary(CreateUserMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CLONE_COLLECTION_ITEM_MESSAGE:
-                return fromBinary(CloneCollectionItemMessageSchema, data);
+                return fromBinary(CloneCollectionItemMessageSchema, payload);
             case Message_DescriminatorType.CREATE_COLLECTION_TYPE_MESSAGE:
-                return fromBinary(CreateCollectionTypeMessageSchema, data);
+                return fromBinary(CreateCollectionTypeMessageSchema, payload);
             case Message_DescriminatorType.UPDATE_COLLECTION_TYPE_MESSAGE:
-                return fromBinary(UpdateCollectionTypeMessageSchema, data);
+                return fromBinary(UpdateCollectionTypeMessageSchema, payload);
             case Message_DescriminatorType.DELETE_COLLECTION_TYPE_MESSAGE:
-                return fromBinary(DeleteCollectionTypeMessageSchema, data);
+                return fromBinary(DeleteCollectionTypeMessageSchema, payload);
             case Message_DescriminatorType.CREATE_COLLECTION_ITEM_MESSAGE:
-                return fromBinary(CreateCollectionItemMessageSchema, data);
+                return fromBinary(CreateCollectionItemMessageSchema, payload);
             case Message_DescriminatorType.UPDATE_COLLECTION_ITEM_MESSAGE:
-                return fromBinary(UpdateCollectionItemMessageSchema, data);
+                return fromBinary(UpdateCollectionItemMessageSchema, payload);
             case Message_DescriminatorType.DELETE_COLLECTION_ITEM_MESSAGE:
-                return fromBinary(DeleteCollectionItemMessageSchema, data);
+                return fromBinary(DeleteCollectionItemMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_DELETE_PROJECT_MESSAGE:
-                return fromBinary(DeleteProjectMessageSchema, data);
+                return fromBinary(DeleteProjectMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_DELETE_USER_MESSAGE:
-                return fromBinary(DeleteUserMessageSchema, data);
+                return fromBinary(DeleteUserMessageSchema, payload);
             case Message_DescriminatorType.DOCTRINE_MESSAGE:
-                return fromBinary(DoctrineEventMessageSchema, data);
+                return fromBinary(DoctrineEventMessageSchema, payload);
             case Message_DescriminatorType.NOTIFICATION_MESSAGE:
-                return fromBinary(NotificationMessageSchema, data);
+                return fromBinary(NotificationMessageSchema, payload);
             case Message_DescriminatorType.REMOVE_ENTITY_TRANSLATION_MESSAGE:
-                return fromBinary(RemoveEntityTranslationMessageSchema, data);
+                return fromBinary(RemoveEntityTranslationMessageSchema, payload);
             case Message_DescriminatorType.TRANSLATE_ENTITY_MESSAGE:
-                return fromBinary(TranslateEntityMessageSchema, data);
+                return fromBinary(TranslateEntityMessageSchema, payload);
             case Message_DescriminatorType.CREATE_CUSTOMER_MESSAGE:
-                return fromBinary(CreateCustomerMessageSchema, data);
+                return fromBinary(CreateCustomerMessageSchema, payload);
             case Message_DescriminatorType.UPDATE_CUSTOMER_MESSAGE:
-                return fromBinary(UpdateCustomerMessageSchema, data);
+                return fromBinary(UpdateCustomerMessageSchema, payload);
             case Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
-                return fromBinary(DeleteCustomerMessageSchema, data);
+                return fromBinary(DeleteCustomerMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
-                return fromBinary(CloneCustomerMessageSchema, data);
+                return fromBinary(CloneCustomerMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
-                return fromBinary(ClearPlatformCacheMessageSchema, data);
+                return fromBinary(ClearPlatformCacheMessageSchema, payload);
             default:
                 return baseMessage;
         }
     }
     catch (error) {
+        console.error(error);
         return undefined;
     }
 }
