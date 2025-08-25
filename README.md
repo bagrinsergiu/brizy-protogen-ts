@@ -4,9 +4,8 @@ TypeScript protobuf generated types for the Brizy platform. This package provide
 
 ## Installation
 
-```bash
-npm install @brizy/protogen-ts
-```
+Currently, this package is not available on npm.
+The repository used from [GitHub](https://github.com/brizy/protogen-ts).
 
 ## Usage
 
