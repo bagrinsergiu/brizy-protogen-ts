@@ -90,10 +90,16 @@ function getMessage(buffer) {
                 return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
                 return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteCustomerMessageSchema, payload);
-            case message_pb_1.Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
+            case message_pb_1.Message_DescriminatorType.CLOUD_CLONE_CUSTOMER_MESSAGE:
                 return (0, protobuf_2.fromBinary)(cloud_pb_1.CloneCustomerMessageSchema, payload);
             case message_pb_1.Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
                 return (0, protobuf_2.fromBinary)(cloud_pb_1.ClearPlatformCacheMessageSchema, payload);
+            case message_pb_1.Message_DescriminatorType.CREATE_SYMBOL_MESSAGE:
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.CreateSymbolMessageSchema, payload);
+            case message_pb_1.Message_DescriminatorType.UPDATE_SYMBOL_MESSAGE:
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.UpdateSymbolMessageSchema, payload);
+            case message_pb_1.Message_DescriminatorType.DELETE_SYMBOL_MESSAGE:
+                return (0, protobuf_2.fromBinary)(brizy_pb_1.DeleteSymbolMessageSchema, payload);
             default:
                 return baseMessage;
         }

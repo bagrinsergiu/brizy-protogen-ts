@@ -49,6 +49,9 @@ import {
   UpdateCollectionItemMessageSchema,
   UpdateCollectionTypeMessageSchema,
   UpdateCustomerMessageSchema,
+  CreateSymbolMessageSchema,
+  UpdateSymbolMessageSchema,
+  DeleteSymbolMessageSchema,
   type CreateCollectionItemMessage,
   type CreateCollectionTypeMessage,
   type CreateCustomerMessage,
@@ -58,6 +61,9 @@ import {
   type UpdateCollectionItemMessage,
   type UpdateCollectionTypeMessage,
   type UpdateCustomerMessage,
+  type CreateSymbolMessage,
+  type UpdateSymbolMessage,
+  type DeleteSymbolMessage,
 } from "../gen/brizy_pb";
 
 import {
@@ -108,6 +114,9 @@ export type AllMessageTypes =
   | UpdateCollectionItemMessage
   | UpdateCollectionTypeMessage
   | UpdateCustomerMessage
+  | CreateSymbolMessage
+  | UpdateSymbolMessage
+  | DeleteSymbolMessage
   | ClearPlatformCacheMessage
   | CloneCollectionItemMessage
   | CloneCustomerMessage
@@ -199,11 +208,20 @@ export function getMessage(
       case Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
         return fromBinary(DeleteCustomerMessageSchema, payload);
 
-      case Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
+      case Message_DescriminatorType.CLOUD_CLONE_CUSTOMER_MESSAGE:
         return fromBinary(CloneCustomerMessageSchema, payload);
 
       case Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
         return fromBinary(ClearPlatformCacheMessageSchema, payload);
+
+      case Message_DescriminatorType.CREATE_SYMBOL_MESSAGE:
+        return fromBinary(CreateSymbolMessageSchema, payload);
+
+      case Message_DescriminatorType.UPDATE_SYMBOL_MESSAGE:
+        return fromBinary(UpdateSymbolMessageSchema, payload);
+
+      case Message_DescriminatorType.DELETE_SYMBOL_MESSAGE:
+        return fromBinary(DeleteSymbolMessageSchema, payload);
 
       default:
         // Unknown discriminator, return base message

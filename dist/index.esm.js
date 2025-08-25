@@ -9,7 +9,7 @@ export { anyPack, anyIs } from "@bufbuild/protobuf/wkt";
 import { base64Decode } from "@bufbuild/protobuf/wire";
 import { fromBinary } from "@bufbuild/protobuf";
 import { MessageSchema, Message_DescriminatorType, } from "./gen/message_pb";
-import { CreateCollectionItemMessageSchema, CreateCollectionTypeMessageSchema, CreateCustomerMessageSchema, DeleteCollectionItemMessageSchema, DeleteCollectionTypeMessageSchema, DeleteCustomerMessageSchema, UpdateCollectionItemMessageSchema, UpdateCollectionTypeMessageSchema, UpdateCustomerMessageSchema, } from "./gen/brizy_pb";
+import { CreateCollectionItemMessageSchema, CreateCollectionTypeMessageSchema, CreateCustomerMessageSchema, DeleteCollectionItemMessageSchema, DeleteCollectionTypeMessageSchema, DeleteCustomerMessageSchema, UpdateCollectionItemMessageSchema, UpdateCollectionTypeMessageSchema, UpdateCustomerMessageSchema, CreateSymbolMessageSchema, UpdateSymbolMessageSchema, DeleteSymbolMessageSchema, } from "./gen/brizy_pb";
 import { ClearPlatformCacheMessageSchema, CloneCollectionItemMessageSchema, CloneCustomerMessageSchema, CloneProjectMessageSchema, CreateProjectMessageSchema, CreateUserMessageSchema, DeleteProjectMessageSchema, DeleteUserMessageSchema, } from "./gen/cloud_pb";
 import { DoctrineEventMessageSchema, } from "./gen/doctrine_pb";
 import { NotificationMessageSchema, } from "./gen/notification_pb";
@@ -65,10 +65,16 @@ export function getMessage(buffer) {
                 return fromBinary(UpdateCustomerMessageSchema, payload);
             case Message_DescriminatorType.DELETE_CUSTOMER_MESSAGE:
                 return fromBinary(DeleteCustomerMessageSchema, payload);
-            case Message_DescriminatorType.CLOUD_CLONE_CUSTOEMR_MESSAGE:
+            case Message_DescriminatorType.CLOUD_CLONE_CUSTOMER_MESSAGE:
                 return fromBinary(CloneCustomerMessageSchema, payload);
             case Message_DescriminatorType.CLOUD_CLEAR_PLATFORM_CACHE_MESSAGE:
                 return fromBinary(ClearPlatformCacheMessageSchema, payload);
+            case Message_DescriminatorType.CREATE_SYMBOL_MESSAGE:
+                return fromBinary(CreateSymbolMessageSchema, payload);
+            case Message_DescriminatorType.UPDATE_SYMBOL_MESSAGE:
+                return fromBinary(UpdateSymbolMessageSchema, payload);
+            case Message_DescriminatorType.DELETE_SYMBOL_MESSAGE:
+                return fromBinary(DeleteSymbolMessageSchema, payload);
             default:
                 return baseMessage;
         }
